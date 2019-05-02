@@ -1,26 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import Item from './Item/Item';
+
+class App extends React.Component{
+  constructor(props){
+    super(props);
+    this.state ={
+      data: []
+    }
+  }
+  componentDidMount(){
+    console.log(1);
+    fetch(`https://demo8421975.mockable.io/products`)
+        .then(data => data.json())
+        .then(json => this.setState({data: json.products}))
+        .catch(err => console.log(err));
+}
+render(){
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        this.state.data.map((item, index)=>{
+          const {name, img, price, stars, link, brand} = item;
+          return(
+            <Item
+              key={index}
+              name={name}
+              img={img}
+              price={price}
+              stars={stars}
+              link={link}
+              brand={brand}
+            />
+          )
+        })
+      }
     </div>
-  );
+  )
+}
+  
 }
 
 export default App;
