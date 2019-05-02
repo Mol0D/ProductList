@@ -1,20 +1,28 @@
 import React from 'react';
 import './Item.css';
 import PropTypes from 'prop-types';
-
+import {Card} from 'react-bootstrap';
 class Item extends React.Component{
     render(){
         const {name, img, price, stars, link, brand} = this.props;
         return(
-            <div className='item'>
-                <p className='name'>{name}</p>
-                <img src={img} className='img' alt="Img"/>
-                <a className="link" href={link}>Go to shope!</a>
-                <p className='infoName'>Inforamtion</p>
-                <p className="info">Price: {price}</p>
-                <p className="info">Stars: {stars}</p>
-                <p className="info">Brand: {brand}</p>
-            </div>
+            
+            <Card className="item">
+                <Card.Img variant="top" src={img} width="320px" height="240px"/>
+                <Card.Body>
+                    <Card.Title className="text">{name}</Card.Title>
+                        <Card.Text>
+                        Price: {price}
+                        </Card.Text>
+                        <Card.Text>
+                        Stars: {stars}
+                        </Card.Text>
+                        <Card.Text>
+                        Brand: {brand}
+                        </Card.Text>
+                        <Card.Link href={link}>Go to shop</Card.Link>
+                </Card.Body>
+            </Card>
         )
     }
 }

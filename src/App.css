@@ -3,20 +3,18 @@
   padding: 0;
   box-sizing: border-box
 }
-
-.products{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.load{
-  color: red;
-  font-size: 25px;
-  text-align: center
+.spinner{
+  text-align: center;
 }
 
 .form{
-  text-align: center;
-  padding: 5px 0;
+  width: 450px;
+  margin: 7px auto 0;
+
+}
+
+.buttonForm{
+  display: block !important;
+  margin: 0 auto;
+  margin-top: 5px ;
 }
