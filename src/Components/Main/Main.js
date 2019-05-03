@@ -17,13 +17,13 @@ class Main extends React.Component{
   }
 
   componentDidMount(){
-    fetch(`https://demo8421975.mockable.io/products`)
+    fetch(`http://localhost:3001/products`)
         .then(data => data.json())
         .then(json =>{
-          this.setState({data: json.products})
+          this.setState({data: json})
           let obj = {};
           for (let i=0; i<json.products.length; i++){
-            let str = json.products[i].bsr_category;
+            let str = json[i].bsr_category;
             obj[str] = true;
           }
           this.setState({listMenu: Object.keys(obj)})
