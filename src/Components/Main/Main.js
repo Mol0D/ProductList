@@ -3,14 +3,17 @@ import './Main.css';
 import { Container, Row, Col, Form, Button, ButtonToolbar} from 'react-bootstrap';
 import ListItems from '../ListItems/ListItems';
 import ProductItems from '../ProductItems/ProductItems';
-
+import FilterLink from '../FilterLink/FilterLink';
+import {Link} from 'react-router-dom'
 class Main extends React.Component{
   constructor(props){
     super(props);
     this.state ={
       data: [],
-      listMenu: []
+      listMenu: [],
     }
+    this._inputSearch = '';
+  
   }
 
   componentDidMount(){
@@ -24,21 +27,30 @@ class Main extends React.Component{
             obj[str] = true;
           }
           this.setState({listMenu: Object.keys(obj)})
-          /* if(this.props.match.params){
-            console.log(this.props.match.params)
+
+          /* if(this.props.match.params.filter === undefined){
+            this.setState({data: json.products})
+          } else{
             this.setState({
               data: this.state.data.filter(
                 product => product.bsr_category === this.props.match.params.filter
               )
             })
-            console.log(this.state.data)
           } */
-          let param = this.props.match.paramsthis.props.match.params.filter;
-          console.log(param)
         })
-        .catch(err => console.log(err));
-        
-          
+        .catch(err => console.log(err)); 
+        /* console.log(this.props.match.params) */
+  }
+
+  searchName = ()=>{
+    console.log(this._inputSearch.value);
+      this.setState({
+        data: this.state.data.filter(
+          product => product.name === this._inputSearch.value
+        )
+      })
+      
+    
   }
 
   handleSubmit = (event) =>{
@@ -78,7 +90,8 @@ render(){
                     <Row>
                       <ButtonToolbar style={{width: '100%'}}>
                         <Col xs="6">
-                        <Button variant="primary" type="submit" className="buttonForm" >Search</Button>
+                          <Link to={this._inputSearch.value} 
+                          >Search</Link>
                         </Col>
                         <Col xs="6">
                         <Button variant="primary" type="reset" className="buttonForm" >Reset</Button>

@@ -1,7 +1,8 @@
 import React from 'react';
 import {ListGroup} from 'react-bootstrap';
 import FilterLink from '../FilterLink/FilterLink';
-
+import {Route} from 'react-router-dom';
+import Main from '../Main/Main';
 class ListItems extends React.Component{
     render(){
         return(
@@ -17,8 +18,7 @@ class ListItems extends React.Component{
                             <ListGroup.Item key={i}>
                                 <FilterLink filter={item}>
                                     {item}
-                                </FilterLink>
-                                    
+                                </FilterLink>      
                             </ListGroup.Item>
                         )
                     })}
