@@ -8,11 +8,11 @@ class ListItems extends React.Component{
         return(
             <nav>
                 <ListGroup>
-                    <ListGroup.Item>
-                        <FilterLink filter='all'>
-                            All
-                        </FilterLink>
-                    </ListGroup.Item>
+                            {/* <ListGroup.Item>
+                                <FilterLink filter='all'>
+                                    All
+                                </FilterLink>      
+                            </ListGroup.Item> */}
                     {this.props.listMenu.map((item, i)=>{
                         return(
                             <ListGroup.Item key={i}>

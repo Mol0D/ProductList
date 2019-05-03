@@ -6,11 +6,10 @@ import Item from '../Item/Item';
 class ProductItems extends React.Component{
     
     render(){
-      
         return(
             <div>
             {
-            this.props.data.length === undefined ? 
+            this.props.data === undefined ? 
             <div className="spinner">
               <Spinner animation="border" variant="primary" />
             </div>

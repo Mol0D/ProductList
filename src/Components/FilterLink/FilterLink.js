@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const FilterLink = props =>{
     return(
-        <Link to={props.filter === 'all'? '' : props.filter }>
+        <Link to={props.filter}>
             {props.children}
         </Link>
     )
