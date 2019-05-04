@@ -6,6 +6,8 @@ import FilterLink from './Components/FilterLink/FilterLink'
 import {Switch, Router, Route, Link} from 'react-router-dom';
 import ProductItems from './Components/ProductItems/ProductItems';
 import FilterProducts from './Components/FilterProducts/FilterProducts';
+import SearchProducts from './Components/FilterProducts/SearchProducts';
+
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -31,8 +33,8 @@ class App extends React.Component{
         .catch(err => console.log(err));   
   }
 
-  handleSubmit = () =>{
-    
+  handleReset = () =>{
+    this.setState({inputSearch: ''})
   }
 
   handleChange = event =>{
@@ -44,6 +46,9 @@ render(){
   }
   const WrappedFilterProducts = props =>{
     return <FilterProducts {...props} data={this.state.data}/>
+  }
+  const WrappedSearchProducts = props =>{
+    return <SearchProducts {...props} data={this.state.data}/>
   }
   return (
     <div className="App">
@@ -69,7 +74,7 @@ render(){
                           >Search</Link>
                         </Col>
                         <Col xs="6">
-                        <Button variant="primary" type="reset" className="buttonForm" >Reset</Button>
+                        <Button variant="primary" type="reset" className="buttonForm" onClick={this.handleReset}>Reset</Button>
                         </Col>
                       </ButtonToolbar>
                     </Row>
@@ -78,6 +83,7 @@ render(){
               </Form>
               <Route exact path="/" component={WrappedProductItems}/>
               <Route path="/:filter" component={WrappedFilterProducts}/>
+              <Route path="/:search" component={WrappedSearchProducts}/>
             </main>
             
           </Col>
