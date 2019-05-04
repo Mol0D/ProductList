@@ -3,16 +3,17 @@ import './App.css';
 import { Container, Row, Col, Form, Button, ButtonToolbar} from 'react-bootstrap';
 import ListItems from './Components/ListItems/ListItems';
 import FilterLink from './Components/FilterLink/FilterLink'
-import Main from './Components/Main/Main';
 import {Switch, Router, Route, Link} from 'react-router-dom';
+import ProductItems from './Components/ProductItems/ProductItems';
+import FilterProducts from './Components/FilterProducts/FilterProducts';
 class App extends React.Component{
   constructor(props){
     super(props);
     this.state ={
       data: [],
       listMenu: [],
+      inputSearch: ''
     }
-    this._inputSearch = ''
   }
 
   componentDidMount(){
@@ -27,24 +28,24 @@ class App extends React.Component{
           }
           this.setState({listMenu: Object.keys(obj)})
         })
-        .catch(err => console.log(err)); 
-        
-        
+        .catch(err => console.log(err));   
   }
 
-  handleSubmit = (event) =>{
-    event.preventDefault();
-    console.log(this._inputSearch.value);
-
+  handleSubmit = () =>{
     
+  }
+
+  handleChange = event =>{
+    this.setState({inputSearch: event.target.value})
   }
 render(){
-  console.log(this.props)
-  const WrappedMain = props =>{
-    return <Main {...props} data={this.state.data}/>
+  const WrappedProductItems = props =>{
+    return <ProductItems {...props} data={this.state.data}/>
+  }
+  const WrappedFilterProducts = props =>{
+    return <FilterProducts {...props} data={this.state.data}/>
   }
   return (
-    
     <div className="App">
       <Container>
         <Row>
@@ -55,18 +56,17 @@ render(){
           </Col>
           <Col xs="9">
             <main>
-            <Form className="form" onSubmit={this.handleSubmit}>
+            <Form className="form">
                 <Form.Group>
                   <Container>
                     <Row>
-                      <Form.Control type="text" placeholder="Search" ref={(node) => this._inputSearch = node}/>
+                      <Form.Control type="text" placeholder="Search" onChange={this.handleChange}/>
                     </Row>
                     <Row>
                       <ButtonToolbar style={{width: '100%'}}>
                         <Col xs="6">
-                          <FilterLink filter={`/${this._inputSearch.value}`}
-                          onClick={this.handleSubmit}
-                          >Search</FilterLink>
+                          <Link to={`/${this.state.inputSearch}`}
+                          >Search</Link>
                         </Col>
                         <Col xs="6">
                         <Button variant="primary" type="reset" className="buttonForm" >Reset</Button>
@@ -76,19 +76,14 @@ render(){
                   </Container>
                 </Form.Group>
               </Form>
-            <Route path='/' component={WrappedMain}/>
+              <Route exact path="/" component={WrappedProductItems}/>
+              <Route path="/:filter" component={WrappedFilterProducts}/>
             </main>
-            {
-              this.state.listMenu.map((item, i)=>{
-                return (
-                  <Route key={i} path={`/${item}`} component={WrappedMain}/>
-                )
-              })
-            }
-            <Route path=":/query" component={WrappedMain}/>
+            
           </Col>
         </Row>
       </Container>
+      
     </div>
   )
 }

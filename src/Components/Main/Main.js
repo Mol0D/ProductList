@@ -1,40 +1,19 @@
 import React from 'react';
-import './Main.css';
 
-
+import { Container, Row, Col, Form, Button, ButtonToolbar} from 'react-bootstrap';
+import ListItems from '../ListItems/ListItems';
+import FilterLink from '../FilterLink/FilterLink'
+import {Switch, Router, Route, Link} from 'react-router-dom';
 import ProductItems from '../ProductItems/ProductItems';
+import FilterProducts from '../FilterProducts/FilterProducts';
 
-import {Link, Route} from 'react-router-dom'
 class Main extends React.Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: []
+    
+    render(){
+        return(
+            <ProductItems data={this.props.data}/>
+        )
     }
-    this.arr = []
-  }
-  
-componentDidMount(){
-  
-  
-    if(this.props.match.path !== '/'){
-      this.arr = this.props.data.filter(
-        product => product.bsr_category === this.props.location.pathname.substring(1))
-        this.state.data = this.arr;
-        this.setState({
-          data: this.state.data
-        })
-    } 
-}
-
-render(){
-  console.log(this.props)
-  return (
-    <div className="App">
-              <ProductItems data={this.state.data}/>
-    </div>
-  )
-}
 }
 
 export default Main;

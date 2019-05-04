@@ -5,8 +5,8 @@ import Item from '../Item/Item';
 
 class ProductItems extends React.Component{
     
-    render(){
-        return(
+        render(){
+          return(
             <div>
             {
             this.props.data === undefined ? 
@@ -37,7 +37,9 @@ class ProductItems extends React.Component{
             }
             </div>
         )
+        }
+        
     }
-}
+
 
 export default ProductItems;
