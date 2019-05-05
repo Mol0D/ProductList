@@ -57,12 +57,16 @@ render(){
                     </Row>
                     <Row>
                       <ButtonToolbar style={{width: '100%'}}>
-                        <Col xs="6">
-                          <Link to={`/${this.state.inputSearch}`}
-                          >Search</Link>
+                        <Col xs="3">
+                          <Button as={Link} 
+                          variant="success"
+                          to={`/${this.state.inputSearch}`}  
+                          className="buttonForm"  
+                          >Search</Button>
                         </Col>
-                        <Col xs="6">
-                        <Button variant="primary" type="reset" className="buttonForm" onClick={this.handleReset}>Reset</Button>
+                        <Col xs="6"></Col>
+                        <Col xs="3">
+                        <Button variant="danger" type="reset" className="buttonForm" onClick={this.handleReset}>Reset</Button>
                         </Col>
                       </ButtonToolbar>
                     </Row>
