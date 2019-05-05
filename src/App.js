@@ -2,12 +2,11 @@ import React from 'react';
 import './App.css';
 import { Container, Row, Col, Form, Button, ButtonToolbar} from 'react-bootstrap';
 import ListItems from './Components/ListItems/ListItems';
-import FilterLink from './Components/FilterLink/FilterLink'
-import {Switch, Router, Route, Link} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
 import ProductItems from './Components/ProductItems/ProductItems';
 import FilterProducts from './Components/FilterProducts/FilterProducts';
 import SearchProducts from './Components/FilterProducts/SearchProducts';
-
+import {fetchProducts} from './Actions/Products';
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -19,18 +18,7 @@ class App extends React.Component{
   }
 
   componentDidMount(){
-    fetch(`http://localhost:3001/products`)
-        .then(data => data.json())
-        .then(json =>{
-          this.setState({data: json})
-          let obj = {};
-          for (let i=0; i<json.length; i++){
-            let str = json[i].bsr_category;
-            obj[str] = true;
-          }
-          this.setState({listMenu: Object.keys(obj)})
-        })
-        .catch(err => console.log(err));   
+      this.props.dispatch(fetchProducts());
   }
 
   handleReset = () =>{
@@ -42,13 +30,13 @@ class App extends React.Component{
   }
 render(){
   const WrappedProductItems = props =>{
-    return <ProductItems {...props} data={this.state.data}/>
+    return <ProductItems {...props} data={this.props.data}/>
   }
   const WrappedFilterProducts = props =>{
-    return <FilterProducts {...props} data={this.state.data}/>
+    return <FilterProducts {...props} data={this.props.data}/>
   }
   const WrappedSearchProducts = props =>{
-    return <SearchProducts {...props} data={this.state.data}/>
+    return <SearchProducts {...props} data={this.props.data}/>
   }
   return (
     <div className="App">
@@ -56,7 +44,7 @@ render(){
         <Row>
           <Col xs="3">
             <nav>
-              <ListItems listMenu={this.state.listMenu}/>
+              <ListItems listMenu={this.props.listMenu}/>
             </nav>
           </Col>
           <Col xs="9">
@@ -85,7 +73,6 @@ render(){
               <Route path="/:filter" component={WrappedFilterProducts}/>
               <Route path="/:search" component={WrappedSearchProducts}/>
             </main>
-            
           </Col>
         </Row>
       </Container>
