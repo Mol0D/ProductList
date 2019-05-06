@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Container, Row, Col, Form, Button, ButtonToolbar} from 'react-bootstrap';
 import ListItems from './Components/ListItems/ListItems';
-import {Route, Link} from 'react-router-dom';
+import {Route, Link, BrowserRouter} from 'react-router-dom';
 import ProductItems from './Components/ProductItems/ProductItems';
 import FilterProducts from './Components/FilterProducts/FilterProducts';
 import SearchProducts from './Components/FilterProducts/SearchProducts';
@@ -18,7 +18,7 @@ class App extends React.Component{
   }
 
   componentDidMount(){
-      this.props.dispatch(fetchProducts());
+    this.props.fetchProducts()
   }
 
   handleReset = () =>{
@@ -73,9 +73,12 @@ render(){
                   </Container>
                 </Form.Group>
               </Form>
+              <div>
               <Route exact path="/" component={WrappedProductItems}/>
               <Route path="/:filter" component={WrappedFilterProducts}/>
               <Route path="/:search" component={WrappedSearchProducts}/>
+              </div>
+              
             </main>
           </Col>
         </Row>
