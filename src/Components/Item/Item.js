@@ -2,9 +2,9 @@ import React from 'react';
 import './Item.css';
 import PropTypes from 'prop-types';
 import {Card} from 'react-bootstrap';
-class Item extends React.Component{
-    render(){
-        const {name, img, price, stars, link, brand} = this.props;
+const Item = props =>{
+    
+        const {name, img, price, stars, link, brand} = props;
         return(
             
             <Card className="item">
@@ -25,8 +25,6 @@ class Item extends React.Component{
             </Card>
         )
     }
-}
-
 
 Item.propTypes = {
     name: PropTypes.string,

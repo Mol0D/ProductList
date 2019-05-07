@@ -2,21 +2,21 @@ import React from 'react';
 import './ProductItems.css';
 import {Spinner, Container, Row, Col} from 'react-bootstrap';
 import Item from '../Item/Item';
+import PropTypes from 'prop-types';
 
-class ProductItems extends React.Component{
-    
-        render(){
-          return(
-            <div>
-            {
-            this.props.data === undefined ? 
+const ProductItems = props =>{
+
+    return(
+      <div>
+        {
+          props.isLoading ? 
             <div className="spinner">
               <Spinner animation="border" variant="primary" />
             </div>
              : 
             <Container>
               <Row>
-                {this.props.data.map((item, index)=>{
+              {props.data && props.data.map((item, index)=>{
                   const {name, img, price, stars, link, brand} = item;
                     return(
                       <Col xs={6} key={index}>
@@ -31,13 +31,20 @@ class ProductItems extends React.Component{
                       </Col>
                     )
                   })
-                }
+                 }
+                
                 </Row>
               </Container>
             }
-            </div>
-        )
-        }     
-    }
+        </div>
+      )
+  }
+    
+ 
+
+  ProductItems.propTypes = {
+    data: PropTypes.array,
+    isLoading: PropTypes.bool
+  }
 
 export default ProductItems;

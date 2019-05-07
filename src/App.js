@@ -2,11 +2,10 @@ import React from 'react';
 import './App.css';
 import { Container, Row, Col, Form, Button, ButtonToolbar} from 'react-bootstrap';
 import ListItems from './Components/ListItems/ListItems';
-import {Route, Link, BrowserRouter} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
 import ProductItems from './Components/ProductItems/ProductItems';
 import FilterProducts from './Components/FilterProducts/FilterProducts';
 import SearchProducts from './Components/FilterProducts/SearchProducts';
-import {fetchProducts} from './Actions/Products';
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -15,10 +14,11 @@ class App extends React.Component{
       listMenu: [],
       inputSearch: ''
     }
+    this.fetchProducts = this.props.fetchProducts;
   }
 
   componentDidMount(){
-    this.props.fetchProducts()
+    this.props.fetchProducts();
   }
 
   handleReset = () =>{
@@ -30,7 +30,7 @@ class App extends React.Component{
   }
 render(){
   const WrappedProductItems = props =>{
-    return <ProductItems {...props} data={this.props.data}/>
+    return <ProductItems {...props} data={this.props.data} isLoading={this.props.isLoading}/>
   }
   const WrappedFilterProducts = props =>{
     return <FilterProducts {...props} data={this.props.data}/>

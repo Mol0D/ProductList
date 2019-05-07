@@ -1,18 +1,11 @@
-import {takeEvery} from 'redux-saga/effects';
-import {put, call} from 'redux-saga/effects';
-import {
-    requestProductsIsLoading, 
-    requestProductsIsError,
-    requestProductsSuccess
-} from '../Actions/Products';
-import {FETCH_PRODUCTS} from '../Constants/ActionTypes';
+import { expectSaga } from 'redux-saga-test-plan';
+import {put} from 'redux-saga/effects'
+import {fetchProductAsync} from './Products';
+import {FETCH_PRODUCTS, REQUEST_PRODUCTS_IS_LOADING} from '../Constants/ActionTypes';
+import {requestProductsIsLoading, requestProductsIsError} from '../Actions/Products';
 
 
-export default function* watchFetchProducts(){
-    yield takeEvery(FETCH_PRODUCTS, fetchProductsAsync);
-}
-
-export function* fetchProductsAsync(){
+function* saga() {
     try{
         yield put(requestProductsIsLoading());
         const products = yield call(()=>{
@@ -32,5 +25,20 @@ export function* fetchProductsAsync(){
     } catch (error){
         yield put(requestProductsIsError())
     }
-}
+  }
 
+describe('test fetchProduct', () => {
+    /* it('correct Action isLoading', ()=>{
+        console.log(name);
+            return expectSaga(fetchProductAsync)
+                .put({
+                    type: REQUEST_PRODUCTS_IS_LOADING
+                })
+                .run()
+    }) */
+    it('returns a greeting', () => {
+        return expectSaga(saga)
+          .put({type: REQUEST_PRODUCTS_IS_LOADING})
+          .run();
+      });
+})
