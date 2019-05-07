@@ -1,6 +1,6 @@
 import {REQUEST_PRODUCTS_IS_LOADING, 
     REQUEST_PRODUCTS_IS_ERROR, 
-    REQUEST_PRODUCTS_SUCCESS} from '../Actions/Products';
+    REQUEST_PRODUCTS_SUCCESS} from '../Constants/ActionTypes';
 
 const initialState = {
     data: [],

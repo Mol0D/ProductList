@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchProducts with component 1`] = `ShallowWrapper {}`;
+
+exports[`SearchProducts without component 1`] = `ShallowWrapper {}`;
