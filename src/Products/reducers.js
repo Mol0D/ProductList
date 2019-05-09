@@ -1,34 +1,36 @@
-import {REQUEST_PRODUCTS_IS_LOADING, 
-    REQUEST_PRODUCTS_IS_ERROR, 
-    REQUEST_PRODUCTS_SUCCESS} from '../Constants/ActionTypes';
+import types from './types';
 
 const initialState = {
     data: [],
+    filterData: [],
     isLoading: false,
     isError: false,
-    listMenu: []
+    listMenu: [],
+    filter: '',
+    search: false
 }
 
 const productsReducer = (state = initialState, action) =>{
     switch(action.type){
-        case REQUEST_PRODUCTS_IS_LOADING:
+        case types.REQUEST_PRODUCTS_IS_LOADING:
             return {
                 isLoading: true,
                 isError: false,
                 data: []
             }
-        case REQUEST_PRODUCTS_IS_ERROR: 
+        case types.REQUEST_PRODUCTS_IS_ERROR: 
             return {
                 isLoading: false,
                 isError: true,
                 data: []
             }
-        case REQUEST_PRODUCTS_SUCCESS:
+        case types.REQUEST_PRODUCTS_SUCCESS:
             return {
                 isLoading: false,
                 isError: false,
                 data: action.payload.products,
-                listMenu: action.payload.listMenu
+                listMenu: action.payload.listMenu,
+                filterData: action.payload.products
             }
         default: 
             return state;

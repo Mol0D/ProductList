@@ -1,7 +1,7 @@
 import {createStore, applyMiddleware} from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import productsReducer from './Products';
-import watchFetchProducts from '../Sagas/Products';
+import productsReducer from '../../Products/reducers';
+import watchFetchProducts from '../../Products/Operations';
 const sagaMiddleware = createSagaMiddleware()
 
 export const store = createStore(

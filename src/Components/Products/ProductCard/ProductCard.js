@@ -1,8 +1,8 @@
 import React from 'react';
-import './Item.css';
+import './ProductCard';
 import PropTypes from 'prop-types';
 import {Card} from 'react-bootstrap';
-const Item = props =>{
+const ProductCard = props =>{
     
         const {name, img, price, stars, link, brand} = props;
         return(
@@ -26,7 +26,7 @@ const Item = props =>{
         )
     }
 
-Item.propTypes = {
+ProductCard.propTypes = {
     name: PropTypes.string,
     img: PropTypes.string,
     price: PropTypes.number,
@@ -35,4 +35,4 @@ Item.propTypes = {
     brand: PropTypes.string
 }
 
-export default Item;
+export default ProductCard;

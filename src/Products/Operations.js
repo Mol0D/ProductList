@@ -1,20 +1,15 @@
 import {takeEvery} from 'redux-saga/effects';
 import {put, call} from 'redux-saga/effects';
-import {
-    requestProductsIsLoading, 
-    requestProductsIsError,
-    requestProductsSuccess
-} from '../Actions/Products';
-import {FETCH_PRODUCTS} from '../Constants/ActionTypes';
-
+import types from './types';
+import actions from './actions';
 
 export default function* watchFetchProducts(){
-    yield takeEvery(FETCH_PRODUCTS, fetchProductsAsync);
+    yield takeEvery(types.FETCH_PRODUCTS, fetchProductsAsync);
 }
 
 export function* fetchProductsAsync(){
     try{
-        yield put(requestProductsIsLoading());
+        yield put(actions.requestProductsIsLoading());
         const products = yield call(()=>{
             return fetch(`http://localhost:3001/products`)
                         .then(res => res.json())
@@ -28,9 +23,9 @@ export function* fetchProductsAsync(){
                             return {data, objRes}
                         })
         })
-        yield put(requestProductsSuccess(products.data, products.objRes))
+        yield put(actions.requestProductsSuccess(products.data, products.objRes))
     } catch (error){
-        yield put(requestProductsIsError())
+        yield put(actions.requestProductsIsError())
     }
 }
 
