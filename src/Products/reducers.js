@@ -10,8 +10,8 @@ const initialState = {
     search: false
 }
 
-const productsReducer = (state = initialState, action) =>{
-    switch(action.type){
+const productsReducer = (state = initialState, action) => {
+    switch (action.type) {
         case types.REQUEST_PRODUCTS_IS_LOADING:
             return {
                 isLoading: true,

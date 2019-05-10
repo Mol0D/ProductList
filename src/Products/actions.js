@@ -1,18 +1,18 @@
 import types from './types';
 
-const requestProductsIsLoading = () =>{
+const requestProductsIsLoading = () => {
     return {
         type: types.REQUEST_PRODUCTS_IS_LOADING
     }
 }
 
-const requestProductsIsError = () =>{
+const requestProductsIsError = () => {
     return {
         type: types.REQUEST_PRODUCTS_IS_ERROR 
     }
 }
 
-const requestProductsSuccess = (products, listMenu) =>{
+const requestProductsSuccess = (products, listMenu) => {
     return {
         type: types.REQUEST_PRODUCTS_SUCCESS,
         payload: {
@@ -22,7 +22,7 @@ const requestProductsSuccess = (products, listMenu) =>{
     }
 }
 
-const fetchProducts = () =>{
+const fetchProducts = () => {
     return {
         type: types.FETCH_PRODUCTS
     }

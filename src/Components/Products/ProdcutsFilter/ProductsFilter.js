@@ -1,26 +1,28 @@
 import React from 'react';
-import ProductsLists from '../ProductsList/ProductsList';
+import ProductsList from '../ProductsList/ProductsList';
 import queryString from 'query-string';
 
-const ProdcutsFilter = props =>{
-    let arr;
-    if(props.data.length !== 0){
-      
-      let parsed = queryString.parse(props.location.search);
-      if(props.location.pathname !== '/products'){
+const ProdcutsFilter = props => {
+
+    let arr = [];
+
+    if( props.data.length && props.location.pathname !== '/products'){
         arr = props.data.filter(product => product.bsr_category === props.match.params.filter)
-      }
-      else{
+    } else {
         arr = props.data
-      }
-      if(parsed.name){
-        arr = arr.filter(product => product.name === parsed.name)
-      } 
-      
     }
+
+    let parsed = queryString.parse(props.location.search);
+    if(parsed.name){
+        arr = arr.filter(product => product.name.includes(parsed.name))
+    } 
+      
     return(
       <div>
-         <ProductsLists data={arr} filter={props.match.params.filter}
+         <ProductsList 
+            data={arr} 
+            filter={props.match.params.filter}
+            search={parsed.name}
          />
       </div>
   )

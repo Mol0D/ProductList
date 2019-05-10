@@ -1,7 +1,6 @@
 import React from 'react';
 
-const Main = props =>{
-    /* console.log(props); */
+const Main = () =>{
     return <h1>Main</h1>
 }
 

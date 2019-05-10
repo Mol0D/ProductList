@@ -1,64 +1,61 @@
 import React from 'react';
-import {Container, Row, Col, Form, Button, ButtonToolbar} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Container, Row, Col, Form, Button} from 'react-bootstrap';
+import history from '../../App/history';
+import PropTypes from 'prop-types';
 
 class SearchForm extends React.Component{
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            inputSearch: ''
-        }
+  constructor (props) {
+    super(props);
+    this.state = {
+        inputSearch: this.props.search
     }
-      handleReset = () =>{
+  }
+  
+  handleReset = () => {
     this.setState({inputSearch: ''})
   }
 
-   handleChange = event =>{
+  handleSubmit = event => {
+    event.preventDefault();
+    if(this.props.filter === undefined){
+      history.push({pathname: `/products`, search: `?name=${this.state.inputSearch}`})
+    } else {
+      history.push({pathname: `/products/${this.props.filter}`, search: `?name=${this.state.inputSearch}`})
+    }
+  }
+
+  handleChange = event =>{
     this.setState({inputSearch: event.target.value})
   }
-  render(){
 
+  render(){
+    /* console.log(this.props) */
     return(
-        <Form className="form">
-                <Form.Group>
-                  <Container>
-                    <Row>
-                      <Form.Control type="text" placeholder="Search" onChange={this.handleChange}/>
-                    </Row>
-                    <Row>
-                      <ButtonToolbar style={{width: '100%'}}>
-                        <Col xs="3">
-                          {
-                            this.props.filter === undefined ? 
-                            <Button 
-                          as={Link}
-                          variant="success"
-                          to={{pathname: `/products`, search: `?name=${this.state.inputSearch}`}}
-                          className="buttonForm"  
-                          >Search</Button>
-                            : 
-                            <Button 
-                          as={Link}
-                          variant="success"
-                          to={{pathname: `/products/${this.props.filter}`, search: `?name=${this.state.inputSearch}`}}
-                          className="buttonForm"  
-                          >Search</Button>
-                          }
-                          
-                        </Col>
-                        <Col xs="6"></Col>
-                        <Col xs="3">
-                        <Button variant="danger" type="reset" className="buttonForm" onClick={this.handleReset}>Reset</Button>
-                        </Col>
-                      </ButtonToolbar>
-                    </Row>
-                  </Container>
-                </Form.Group>
-              </Form>
+      <Form className="form" onSubmit={this.handleSubmit}>
+        <Form.Group>
+          <Container>
+            <Row style={{textAlign: 'center'}}>
+              <Col xs="10">
+              <Form.Control type="text" 
+                placeholder="Search" 
+                value={this.state.inputSearch}
+                onChange={this.handleChange}
+              />
+              </Col>
+              <Col xs="2">
+                <Button variant="danger" type="reset" onClick={this.handleReset}>Reset</Button>
+              </Col>
+            </Row>
+          </Container>
+        </Form.Group>
+      </Form>
     )
-  }
-    
+  }   
+}
+
+SearchForm.propTypes = {
+  filter: PropTypes.string
 }
 
 export default SearchForm;
