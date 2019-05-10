@@ -2,12 +2,9 @@ import types from './types';
 
 const initialState = {
     data: [],
-    filterData: [],
     isLoading: false,
     isError: false,
-    listMenu: [],
-    filter: '',
-    search: false
+    listMenu: []
 }
 
 const productsReducer = (state = initialState, action) => {
@@ -16,21 +13,22 @@ const productsReducer = (state = initialState, action) => {
             return {
                 isLoading: true,
                 isError: false,
-                data: []
+                data: [],
+                listMenu: []
             }
         case types.REQUEST_PRODUCTS_IS_ERROR: 
             return {
                 isLoading: false,
                 isError: true,
-                data: []
+                data: [],
+                listMenu: []
             }
         case types.REQUEST_PRODUCTS_SUCCESS:
             return {
                 isLoading: false,
                 isError: false,
                 data: action.payload.products,
-                listMenu: action.payload.listMenu,
-                filterData: action.payload.products
+                listMenu: action.payload.listMenu
             }
         default: 
             return state;

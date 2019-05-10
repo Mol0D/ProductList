@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductsList with component 1`] = `ShallowWrapper {}`;
+
+exports[`ProductsList without component 1`] = `ShallowWrapper {}`;

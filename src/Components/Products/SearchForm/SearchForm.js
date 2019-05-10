@@ -30,18 +30,17 @@ class SearchForm extends React.Component{
   }
 
   render(){
-    /* console.log(this.props) */
     return(
       <Form className="form" onSubmit={this.handleSubmit}>
         <Form.Group>
           <Container>
             <Row style={{textAlign: 'center'}}>
               <Col xs="10">
-              <Form.Control type="text" 
-                placeholder="Search" 
-                value={this.state.inputSearch}
-                onChange={this.handleChange}
-              />
+                <Form.Control type="text" 
+                  placeholder="Search" 
+                  value={this.state.inputSearch}
+                  onChange={this.handleChange}
+                />
               </Col>
               <Col xs="2">
                 <Button variant="danger" type="reset" onClick={this.handleReset}>Reset</Button>

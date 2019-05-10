@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Item with component 1`] = `ShallowWrapper {}`;
-
-exports[`Item without component 1`] = `ShallowWrapper {}`;

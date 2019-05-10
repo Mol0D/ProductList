@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import CategoryMenu from '../CategoryMenu/CategoryMenu';
-import ProductsFilter from './ProdcutsFilter/ProductsFilter';
+import ProductsFilter from './ProductsFilter/ProductsFilter';
 import { Route } from 'react-router-dom'
 
 class ProductItems extends React.Component{
